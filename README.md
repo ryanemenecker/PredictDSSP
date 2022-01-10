@@ -67,35 +67,17 @@ would return
 All networks were trained using idptools-parrot version 1.6.1
  The parameters used in PARROT were: dtype = classifier, number_classes = 3, LR 0.001, 1 layer, 10 hidden size, batch size of 64, 100 epochs
 
-PARROT returned results on the accuracy for each network. Becaues the networks had more/less data and were more/less balanced, their capacity to make accurate predictions from their own testing set *might not correspond to their overall accuracy*. There is more on the specific balance/data amount below. Once I have a better grasp on overall accuracy by testing the networks on a balanced dataset, I will update this documenation with that information. In the mean time the results were as follows (output from PARROT):
+Each of the networks was tested on approximately 4,300 sequences from a balanced dataset. The results for each network are below.
 
-dssp_2021_12_20_CB_mf_0p8.pt -- most balanced, least data total -- 
- 
- Matthews Correlation Coef : 0.512
- 
- F1 Score : 0.679
- 
- Accuracy : 0.679
+For dssp_2021_12_20_CB_mf_0p8.pt, total percent correct = 67.885% and MCC = 0.51173,
+percent correct predicting 0 = 62.771%, percent correct predicting 1 = 68.668%, percent correct predicting 2 = 71.085%
 
-
-
-dssp_2021_12_20_default_CB.pt -- second most balanced, second most amount of data --
+For dssp_2021_12_20_default_CB.pt, total percent correct = 69.817% and MCC = 0.53887,
+percent correct predicting 0 = 70.016%, percent correct predicting 1 = 60.978%, percent correct predicting 2 = 75.965%
  
- Matthews Correlation Coef : 0.556
+For dssp_2021_12_20_no_CB.pt, total percent correct = 69.673% and MCC = 0.53695,
+percent correct predicting 0 = 72.869%, percent correct predicting 1 = 59.516%, percent correct predicting 2 = 74.557%
  
- F1 Score : 0.721
- 
- Accuracy : 0.723
-
-
-
-dssp_2021_12_20_no_CB.pt -- Least balance, ost data. No filtering.
- 
- Matthews Correlation Coef : 0.596
- 
- F1 Score : 0.758
- 
- Accuracy : 0.761
 
 As noted after each network, 
  
