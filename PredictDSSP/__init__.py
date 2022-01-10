@@ -1,7 +1,8 @@
 """Prediicting DSSP Scores"""
 
 # Add imports here
-from .dssp import *
+#from .dssp import *
+from .predict import *
 
 # Handle versioneer
 from ._version import get_versions
