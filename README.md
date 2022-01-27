@@ -35,7 +35,7 @@ We have found that the predictor performs relatively well overall but does not s
 
 To clone the GitHub repository and gain the ability to modify a local copy of the code, run
 
-	$ git clone https://github.com/idptools/PredictDSSP.git
+	$ git clone https://github.com/ryanemenecker/PredictDSSP.git
 	$ cd PredictDSSP
 	$ pip install .
 
@@ -231,3 +231,4 @@ To save the graph, set output file to the path followed by the output file name.
 ``-o`` or ``--output-file`` lets you save the scores to a specific location.
 
 	$ dssp-fasta /path/to/my/file/sequences_file.fasta -o /where/to/save/these/scores/dssp_scores.csv
+

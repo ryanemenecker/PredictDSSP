@@ -51,6 +51,7 @@ setup(
     # url='http://www.my_package.com',  # Website
     install_requires=[
             'torch',
+            'metapredict',
             'numpy',
             'matplotlib',
             'protfasta',
