@@ -10,6 +10,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import metapredict as meta
 from PredictDSSP.dssp_predict import predict_dssp
+import alphaPredict as alpha
 
 def graph(sequence,
           title='Predicted DSSP Scores',
@@ -35,26 +36,26 @@ def graph(sequence,
     title : str
         Sets the title of the generated figure. Default = "Predicted protein disorder"
 
-	color_0 : string
-		the color for 0 values, which correspond to helicity
+    color_0 : string
+        the color for 0 values, which correspond to helicity
 
-	color_1 : string
-		the color for 0 values, which correspond to beta strand/sheet
+    color_1 : string
+        the color for 0 values, which correspond to beta strand/sheet
 
-	color_2 : string
-		the color for 0 values, which correspond to coil
+    color_2 : string
+        the color for 0 values, which correspond to coil
 
-	disorder_color : string
-		the color for disordered regions
+    disorder_color : string
+        the color for disordered regions
 
-	no_disorder_bars : Bool
-		If set to False, no disorder bars will be shown.
+    no_disorder_bars : Bool
+        If set to False, no disorder bars will be shown.
 
-	exclude_disorder : Bool
-		Whether to exlude disordered regions from predictions	
+    exclude_disorder : Bool
+        Whether to exlude disordered regions from predictions    
 
-	dis_threshhold : float
-		The theshhold disorder score for metapredict scores to consider something disordered
+    dis_threshhold : float
+        The theshhold disorder score for metapredict scores to consider something disordered
 
     DPI : int
         Dots-per-inch. Defines the resolution of the generated .png figure. Note that
@@ -110,64 +111,67 @@ def graph(sequence,
     disorder_list = []
 
     if exclude_disorder == True:
-    	disorder_scores = meta.predict_disorder(sequence)
+        pLDDT_scores = alpha.predict(sequence)
+        disorder_scores = meta.predict_disorder(sequence)
 
     for sco in range(0, len(dssp_scores)):
-    	cur_score = dssp_scores[sco]
-    	if exclude_disorder == False:
-	    	if cur_score == 0:
-	    		zero_list.append(1)
-	    		one_list.append(0)
-	    		two_list.append(0)
-	    	elif cur_score == 1:
-	    		zero_list.append(0)
-	    		one_list.append(1)
-	    		two_list.append(0)
-	    	else:
-	    		zero_list.append(0)
-	    		one_list.append(0)
-	    		two_list.append(1)
-    	else:
-	    	cur_disorder_score = disorder_scores[sco]
-	    	if cur_disorder_score >= dis_threshhold:
-	    		zero_list.append(0)
-	    		one_list.append(0)
-	    		two_list.append(0)
-	    		disorder_list.append(1)
-	    	else:
-	    		disorder_list.append(0)
-		    	if cur_score == 0:
-		    		zero_list.append(1)
-		    		one_list.append(0)
-		    		two_list.append(0)
-		    	elif cur_score == 1:
-		    		zero_list.append(0)
-		    		one_list.append(1)
-		    		two_list.append(0)
-		    	else:
-		    		zero_list.append(0)
-		    		one_list.append(0)
-		    		two_list.append(1)
+        cur_score = dssp_scores[sco]
+        if exclude_disorder == False:
+            if cur_score == 0:
+                zero_list.append(1)
+                one_list.append(0)
+                two_list.append(0)
+            elif cur_score == 1:
+                zero_list.append(0)
+                one_list.append(1)
+                two_list.append(0)
+            else:
+                zero_list.append(0)
+                one_list.append(0)
+                two_list.append(1)
+        else:
+            cur_disorder_score = disorder_scores[sco]
+            cur_alpha_score = pLDDT_scores[sco]
+            if cur_disorder_score >= dis_threshhold and cur_alpha_score <=65:
+                    zero_list.append(0)
+                    one_list.append(0)
+                    two_list.append(0)
+                    disorder_list.append(1)
+
+            else:
+                disorder_list.append(0)
+                if cur_score == 0:
+                    zero_list.append(1)
+                    one_list.append(0)
+                    two_list.append(0)
+                elif cur_score == 1:
+                    zero_list.append(0)
+                    one_list.append(1)
+                    two_list.append(0)
+                else:
+                    zero_list.append(0)
+                    one_list.append(0)
+                    two_list.append(1)
 
     axes.bar(xValues + 0.00, zero_list, color=color_0)
     axes.bar(xValues + 0.00, one_list, color=color_1)
     axes.bar(xValues + 0.00, two_list, color=color_2)
 
     if exclude_disorder == True:
-    	if no_disorder_bars == False:
-    		axes.bar(xValues + 0.00, disorder_list, color=disorder_color)
+        if no_disorder_bars == False:
+            axes.bar(xValues + 0.00, disorder_list, color=disorder_color)
 
     plt.ylim(0, 2)
 
     axes.set_yticks([0, 1])
 
     if exclude_disorder == True:
-    	if no_disorder_bars == False:
-    		axes.legend(labels=['helix', 'beta strand / sheet', 'coil', 'disordered'], loc='upper right')
-    	else:
-    		axes.legend(labels=['helix', 'beta strand / sheet', 'coil',], loc='upper right')
+        if no_disorder_bars == False:
+            axes.legend(labels=['helix', 'beta strand / sheet', 'coil', 'disordered'], loc='upper right')
+        else:
+            axes.legend(labels=['helix', 'beta strand / sheet', 'coil',], loc='upper right')
     else:
-    	axes.legend(labels=['helix', 'beta strand / sheet', 'coil'], loc='upper right')
+        axes.legend(labels=['helix', 'beta strand / sheet', 'coil'], loc='upper right')
 
     if output_file is None:
         plt.show()

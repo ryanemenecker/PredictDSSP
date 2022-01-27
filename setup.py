@@ -55,7 +55,8 @@ setup(
             'numpy',
             'matplotlib',
             'protfasta',
-            'urllib3'],               # Required packages, pulls from pip if needed; do not use for Conda deployment
+            'urllib3',
+            'alphaPredict==1.0'],               # Required packages, pulls from pip if needed; do not use for Conda deployment
     # platforms=['Linux',
     #            'Mac OS-X',
     #            'Unix',
