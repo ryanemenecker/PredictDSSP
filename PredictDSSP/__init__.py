@@ -2,7 +2,7 @@
 
 # Add imports here
 #from .dssp import *
-from .predict import *
+from .dssp import *
 
 # Handle versioneer
 from ._version import get_versions

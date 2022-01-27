@@ -16,6 +16,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('../scripts/'))
 
 import PredictDSSP
 
@@ -166,7 +167,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'PredictDSSP', 'dssp Documentation',
-     author, 'PredictDSSP', 'Prediicting DSSP Scores',
+     author, 'PredictDSSP', 'Predicting DSSP Scores',
      'Miscellaneous'),
 ]
 
