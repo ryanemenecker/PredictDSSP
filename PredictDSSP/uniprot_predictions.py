@@ -35,7 +35,7 @@ def fetch_sequence(uniprot_id):
         s = s[:len(s)-1]
 
     if s.find('Sorry') > -1:
-        raise MetapredictError('Error: unable to fetch UniProt sequence with accession %s'%(uniprot_id))
+        raise DsspError('Error: unable to fetch UniProt sequence with accession %s'%(uniprot_id))
 
 
     return s

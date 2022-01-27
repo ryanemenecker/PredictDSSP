@@ -25,6 +25,9 @@ if __name__ == "__main__":
     parser.add_argument('-D', '--dpi', default=150, type=int, metavar='DPI',
                         help='Optional. Set DPI to change resolution of output graphs. Default is 150.')
 
+    parser.add_argument('-c', '--cutoff', default=0.3, type=float,
+                        help='Optional. Set disorder cutoff value.')
+
     parser.add_argument('-e', '--exclude_disorder', action='store_true', help='Optional. Use this flag to exclude disordered regions.')                        
 
     parser.add_argument('-o', '--output-file', const='USE_DEFAULT', help='Filename for where to save the returned graph. \
@@ -49,8 +52,8 @@ if __name__ == "__main__":
     # if we don't want to save...
     if args.output_file is None:
         try:
-            dssp.graph_dssp_uniprot(args.uniprot, title=graph_title, exclude_disorder=exclude_disorder, DPI=args.dpi)
-        except MetapredictError as e:
+            dssp.graph_dssp_uniprot(args.uniprot, title=graph_title, dis_threshhold = args.cutoff, exclude_disorder=exclude_disorder, DPI=args.dpi)
+        except DsspError as e:
             print(e)
             exit(1)
 
@@ -62,7 +65,7 @@ if __name__ == "__main__":
         else:
             outname = args.output_file
 
-        dssp.graph_dssp_uniprot(args.uniprot, title=graph_title, exclude_disorder=exclude_disorder, DPI=args.dpi, output_file=outname)
+        dssp.graph_dssp_uniprot(args.uniprot, title=graph_title, dis_threshhold = args.cutoff, exclude_disorder=exclude_disorder, DPI=args.dpi, output_file=outname)
 
 
 

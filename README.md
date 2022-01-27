@@ -217,6 +217,9 @@ To save the graph, set output file to the path followed by the output file name.
 
 	$ dssp-uniprot Q8RYC8 -t MyCoolGraph
 
+``-c`` or ``--cutoff`` lets you set cutoff value for something to be considered disordered.
+
+	$ dssp-uniprot Q8RYC8 -c 0.5
 
 ### Generating DSSP scores from a FASTA file form the command-line
 

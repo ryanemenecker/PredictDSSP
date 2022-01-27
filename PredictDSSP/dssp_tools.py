@@ -4,7 +4,7 @@ from PredictDSSP.dssp_exceptions import DsspError
 
 def valid_range(inval, minval, maxval):
     if inval < minval or inval > maxval:
-        raise MetapredictError('Value %1.3f is outside of range [%1.3f, %1.3f]' % (inval, minval, maxval))
+        raise DsspError('Value %1.3f is outside of range [%1.3f, %1.3f]' % (inval, minval, maxval))
 
 
 def write_csv(input_dict, output_file):
@@ -32,7 +32,7 @@ def write_csv(input_dict, output_file):
     try:
         fh = open(output_file, 'w')
     except Exception:
-        raise MetapredictError('Unable to write to file destination %s' % (output_file))
+        raise DsspError('Unable to write to file destination %s' % (output_file))
 
     # for each entry
     for idx in input_dict:
