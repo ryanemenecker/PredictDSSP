@@ -33,6 +33,11 @@ We have found that the predictor performs relatively well overall but does not s
 
 ## Installation
 
+To install PredictDSSP using PyPi, you can use pip from the command-line. 
+
+	$ pip install PredictDSSP
+
+
 To clone the GitHub repository and gain the ability to modify a local copy of the code, run
 
 	$ git clone https://github.com/ryanemenecker/PredictDSSP.git
