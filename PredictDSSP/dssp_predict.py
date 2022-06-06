@@ -1,7 +1,7 @@
 import os 
 from PredictDSSP import py_predictor_v2
 
-def predict_dssp(sequence):
+def predict_dssp(sequence, raw_vals=False):
 
     # get path to network
     PATH = os.path.dirname(os.path.realpath(__file__))
@@ -19,18 +19,19 @@ def predict_dssp(sequence):
     value = my_predictor.predict(sequence)
     # make empty list to hold values
     final_vals = []
-    # append values to the list depending on the probabilities for each value
-    for i in value:
-        highest_val = max(i)
-        if highest_val == i[0]:
-            final_vals.append(0)
-        elif highest_val == i[1]:
-            final_vals.append(1)
-        else:
-            final_vals.append(2)
-    # return the final values based on the probabilities returned from the network
-    return final_vals
-
-
-
+    if raw_vals == False:
+        # append values to the list depending on the probabilities for each value
+        for i in value:
+            highest_val = max(i)
+            if highest_val == i[0]:
+                final_vals.append(0)
+            elif highest_val == i[1]:
+                final_vals.append(1)
+            else:
+                final_vals.append(2)
+        # return the final values based on the probabilities returned from the network
+        return final_vals
+    else:
+        return value
+        
 

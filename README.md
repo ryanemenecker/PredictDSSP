@@ -55,6 +55,14 @@ Next, make DSSP score predictions:
 
 	dssp.predict_dssp('MQWESSASSSWQQQQGGGGSAFACACAAFAAAAAA')
 
+**Additional usage**
+
+You can now get the raw values from the predictions. These are returned as a list of lists. The first element in each list is the helical probability, the second element in each list is the probability to form a beta strand/sheet, and the final element in each list is the probability to be coiled.
+
+Example
+
+	dssp.predict_dssp('MQWESSASSSWQQQQGGGGSAFACACAAFAAAAAA', raw_vals=True)
+
 
 ### Graphing DSSP scores
 

@@ -28,12 +28,32 @@ from PredictDSSP.uniprot_predictions import fetch_sequence as _fetch_sequence
 from PredictDSSP.dssp_exceptions import DsspError
 
 
-def predict_dssp(sequence):
+def predict_dssp(sequence, raw_vals=False):
+    '''
+    Function to predict dssp scores
+
+    Parameters
+    ----------
+    sequence : str
+        The amino acid sequence as a sting
+
+    raw_vals : bool
+        Whether to return the categorization based
+        on the dssp probabilities (default)
+        If set to True, will return a list of lists where
+        the first element in each list [0] is the probability
+        that the amino acid has a helical propensity, the second
+        element [1] is the propensity to form a beta strand
+        / beta sheet, and the final element [2] is the
+        propensity to form a coil.
+    '''
+
+
     # make all uppercase
     sequence = sequence.upper()
     
     # return values
-    return _predict_dssp(sequence)
+    return _predict_dssp(sequence, raw_vals=raw_vals)
 
 
 def graph_dssp(sequence,
