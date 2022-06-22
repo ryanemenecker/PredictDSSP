@@ -22,6 +22,7 @@ from PredictDSSP import dssp_tools as _dssp_tools
 
 # stuff for graphing
 from PredictDSSP.dssp_graph import graph as _graph
+from PredictDSSP.dssp_graph import graph_values as _graph_values
 
 # stuff for uniprot
 from PredictDSSP.uniprot_predictions import fetch_sequence as _fetch_sequence
@@ -59,7 +60,8 @@ def predict_dssp(sequence, raw_vals=False):
 def graph_dssp(sequence,
           title='Predicted DSSP Scores',
           exclude_disorder=False,
-          no_disorder_bars = False,          
+          no_disorder_bars = False, 
+          raw_vals=False,         
           dis_threshhold = 0.3,
           DPI=150,
           output_file=None):
@@ -77,6 +79,9 @@ def graph_dssp(sequence,
 
     no_disorder_bars : Bool
         If set to False, no disorder bars will be shown.
+
+    raw_vals : Bool
+        If set to True, will just graph the raw probabilities for all values
 
     exclude_disorder : Bool
         Whether to exlude disordered regions from predictions    
@@ -111,9 +116,12 @@ def graph_dssp(sequence,
     # ensure sequence is upper case
     sequence = sequence.upper()
 
-    _graph(sequence, title=title, no_disorder_bars = no_disorder_bars,
-        exclude_disorder=exclude_disorder, dis_threshhold=dis_threshhold, 
-        DPI=DPI, output_file=output_file)
+    if raw_vals == False:
+        _graph(sequence, title=title, no_disorder_bars = no_disorder_bars,
+            exclude_disorder=exclude_disorder, dis_threshhold=dis_threshhold, 
+            DPI=DPI, output_file=output_file)
+    else:
+        _graph_values(sequence, title=title, DPI=DPI, output_file=output_file)
 
 
 
@@ -313,7 +321,7 @@ def graph_dssp_fasta(filepath,
             no_disorder_bars=no_disorder_bars, dis_threshhold=dis_threshhold, DPI=DPI)
 
 
-def predict_dssp_uniprot(uniprot_id):
+def predict_dssp_uniprot(uniprot_id, raw_vals=False):
     """
     Function to return dssp scores of a single input sequence. Uses a 
     Uniprot ID to get the sequence.
@@ -322,8 +330,10 @@ def predict_dssp_uniprot(uniprot_id):
     ------------
 
     uniprot_ID : str
-         The uniprot ID of the sequence to predict
+        The uniprot ID of the sequence to predict
 
+    raw_vals : Bool
+        Whether or not to return raw values
 
     Returns
     ----------
@@ -336,7 +346,7 @@ def predict_dssp_uniprot(uniprot_id):
     sequence = _fetch_sequence(uniprot_id)
 
     # return scores
-    return _predict_dssp(sequence)
+    return _predict_dssp(sequence, raw_vals=raw_vals)
 
 
 # def graph_dssp_uniprot
@@ -347,7 +357,8 @@ def graph_dssp_uniprot(uniprot_id,
           no_disorder_bars = False,          
           dis_threshhold = 0.3,
           DPI=150,
-          output_file=None):
+          output_file=None,
+          raw_vals=False):
     """
     Function for graphing predicted dssp scores.
 
@@ -381,6 +392,9 @@ def graph_dssp_uniprot(uniprot_id,
         to the ``matplotlib.pyplot.savefig()`` function as the ``fname`` parameter. 
         Default = None.
 
+    raw_vals : bool
+        whether to graph the raw probability values for each secondary structure category
+
 
     Returns
     -----------
@@ -396,7 +410,10 @@ def graph_dssp_uniprot(uniprot_id,
     # get sequence
     sequence = _fetch_sequence(uniprot_id)
 
-    _graph(sequence, title=title, no_disorder_bars = no_disorder_bars,
-        exclude_disorder=exclude_disorder, dis_threshhold=dis_threshhold, 
-        DPI=DPI, output_file=output_file)
+    if raw_vals==False:
+        _graph(sequence, title=title, no_disorder_bars = no_disorder_bars,
+            exclude_disorder=exclude_disorder, dis_threshhold=dis_threshhold, 
+            DPI=DPI, output_file=output_file)
+    else:
+        _graph_values(sequence, title=title, DPI=DPI, output_file=output_file)
 

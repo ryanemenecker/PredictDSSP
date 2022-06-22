@@ -77,6 +77,10 @@ To graph DSSP scores:
 
 *optional arguments*
 
+To get the raw values graphed (the actual probabilities for each secondary structure), set raw_vals=True. Ex:
+
+	dssp.graph_dssp('MQWESSASSSWQQQQGGGGSAFACACAAFAAAAAA', raw_vals=True)
+
 To set the title, set 'title' equal to your desired title. Ex:
 
 	dssp.graph_dssp('MQWESSASSSWQQQQGGGGSAFACACAAFAAAAAA', title='mygraph')
@@ -160,6 +164,12 @@ Ex:
 
 	dssp.predict_dssp_uniprot('Q8RYC8')
 
+*optional arguments*
+
+To get raw probability values, simply set raw_vals=True. Ex.
+
+	dssp.predict_dssp_uniprot('Q8RYC8', raw_vals=True)
+
 
 ### Graphing DSSP scores from uniprot ID
 
@@ -172,6 +182,10 @@ Ex:
 	dssp.graph_dssp_uniprot('Q8RYC8')
 
 *optional arguments*
+
+To graph raw probability values, simply set raw_vals=True. Ex.
+
+	dssp.graph_dssp_uniprot('Q8RYC8', raw_vals=True)
 
 To set the title, set 'title' equal to your desired title. Ex:
 
@@ -233,6 +247,10 @@ To save the graph, set output file to the path followed by the output file name.
 ``-c`` or ``--cutoff`` lets you set cutoff value for something to be considered disordered.
 
 	$ dssp-uniprot Q8RYC8 -c 0.5
+
+``-r`` or ``--raw_vals`` lets you graph raw value probabilities
+
+	$ dssp-uniprot Q8RYC8 -r
 
 ### Generating DSSP scores from a FASTA file form the command-line
 

@@ -5,6 +5,11 @@ __pycache__/
 
 # C extensions
 *.so
+.DS_Store
+
+# other DS_Store problems
+PredictDSSP/.DS_Store
+
 
 # Distribution / packaging
 .Python

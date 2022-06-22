@@ -36,12 +36,19 @@ if __name__ == "__main__":
     
     parser.add_argument('-t', '--title', help='Title to put on graph')
 
+    parser.add_argument('-r', '--raw_vals', action='store_true', help='Optional. Use this flag to graph raw probabilities for each secondary structure.')                        
+
     args = parser.parse_args()
 
     if args.exclude_disorder == True:
         exclude_disorder=True
     else:
         exclude_disorder=False
+
+    if args.raw_vals == True:
+        raw_vals = True
+    else:
+        raw_vals = False
 
     # set title
     if args.title:
@@ -52,7 +59,7 @@ if __name__ == "__main__":
     # if we don't want to save...
     if args.output_file is None:
         try:
-            dssp.graph_dssp_uniprot(args.uniprot, title=graph_title, dis_threshhold = args.cutoff, exclude_disorder=exclude_disorder, DPI=args.dpi)
+            dssp.graph_dssp_uniprot(args.uniprot, title=graph_title, raw_vals=raw_vals, dis_threshhold = args.cutoff, exclude_disorder=exclude_disorder, DPI=args.dpi)
         except DsspError as e:
             print(e)
             exit(1)
@@ -65,7 +72,7 @@ if __name__ == "__main__":
         else:
             outname = args.output_file
 
-        dssp.graph_dssp_uniprot(args.uniprot, title=graph_title, dis_threshhold = args.cutoff, exclude_disorder=exclude_disorder, DPI=args.dpi, output_file=outname)
+        dssp.graph_dssp_uniprot(args.uniprot, title=graph_title, raw_vals=raw_vals, dis_threshhold = args.cutoff, exclude_disorder=exclude_disorder, DPI=args.dpi, output_file=outname)
 
 
 

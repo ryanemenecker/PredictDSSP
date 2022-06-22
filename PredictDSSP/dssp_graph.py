@@ -12,6 +12,7 @@ import metapredict as meta
 from PredictDSSP.dssp_predict import predict_dssp
 import alphaPredict as alpha
 
+
 def graph(sequence,
           title='Predicted DSSP Scores',
           color_0='red',
@@ -178,4 +179,114 @@ def graph(sequence,
     else:
         plt.savefig(fname=output_file, dpi=DPI)
         plt.close()
+
+
+
+def graph_values(sequence,
+          title='DSSP Values',
+          DPI=150,
+          output_file=None):
+    """
+    Function for graphing the DSSP probability scores for 
+    each value.
+    
+    Parameters
+    -----------
+    sequence : str 
+        Input amino acid sequence (as string) to be predicted.
+
+    title : str
+        Sets the title of the generated figure. 
+        Default = "DSSP Values"
+        
+
+    DPI : int
+        Dots-per-inch. Defines the resolution of the generated .png figure.
+        Note that if an alternative filetype is pathed the matplotlib 
+        backened will automatically generate a file of the relevant type (e.g. 
+       .pdf, .jpg, or .eps).
+        
+        
+    output_file : str
+        If provided, the output_file variable defines the location and type 
+        of the file to be saved. This should be a file location and filename 
+        with a valid matplotlib extension (such as .png, .jpg, .pdf) and, if 
+        provided, this value is passed directly to the 
+        ``matplotlib.pyplot.savefig()`` function as the ``fname`` parameter. 
+        Default = None.
+        
+
+    Returns
+    -----------
+    None 
+        No return type, but will either generate an on-screen plot OR will 
+        save a file to disk, depending on if output_file is provided (or not).
+        
+    """
+
+    # set this such that PDF-generated figures become editable
+    matplotlib.rcParams['pdf.fonttype'] = 42
+    matplotlib.rcParams['ps.fonttype'] = 42
+
+    #set n_res to lenght of seq
+    n_res = len(sequence)
+
+
+    fig = plt.figure(num=title, figsize=[11, 3], dpi=DPI, edgecolor='black')
+    #axes = fig.add_axes([0.15, 0.15, 0.55, 0.75])
+    axes = fig.add_axes([0.1, 0.15, 0.55, 0.75])     
+    
+    # set x label
+    axes.set_xlabel("Residue")
+
+    # set the title
+    axes.set_title(title)
+    
+    # modify y_label if needed
+
+    axes.set_ylabel("DSSP score probability")
+
+    # make x values for each residue with predicted disorder
+    xValues = np.arange(1, n_res+1)
+
+    all_dssp_vals = predict_dssp(sequence, raw_vals=True)
+    
+    helicity_vals = []
+    strand_vals = []
+    coil_vals = []
+
+    for ind_val in all_dssp_vals:
+        helicity_vals.append(ind_val[0])
+        strand_vals.append(ind_val[1])
+        coil_vals.append(ind_val[2])
+
+    # graph the dssp values of each residue at each point along the x-axis
+
+    ds1, = axes.plot(xValues, helicity_vals, color='red', linewidth='1.6', label = 'Helicity Scores')
+    ds2, = axes.plot(xValues, strand_vals, color='blue', linewidth='1.6', label = 'Beta Strand Scores')
+    ds3, = axes.plot(xValues, coil_vals, color='orange', linewidth='1.6', label = 'Coil Scores')
+
+
+    # set x limit as the number of residues
+    axes.set_xlim(1, n_res+1)
+
+    # set ylim
+    axes.set_ylim(-0.003, 1.003)
+
+    # add dashed lines at 0.2 intervals if cutoff lines not specified
+    for i in [0.2, 0.4, 0.6, 0.8]:
+        axes.plot([0, n_res+2], [i, i], color="black", linestyle="dashed", linewidth="0.5")
+    
+    # make legend
+    axes.legend(handles=[ds1, ds2, ds3], bbox_to_anchor=(1.14, 1), loc='best', prop={'size': 12})
+
+
+    if output_file is None:
+        plt.show()
+    else:
+        plt.savefig(fname=output_file, dpi=DPI)
+        plt.close()
+
+
+
 
