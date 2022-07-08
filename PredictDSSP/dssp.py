@@ -28,6 +28,8 @@ from PredictDSSP.dssp_graph import graph_values as _graph_values
 from PredictDSSP.uniprot_predictions import fetch_sequence as _fetch_sequence
 from PredictDSSP.dssp_exceptions import DsspError
 
+from getSequence import getseq
+
 
 def predict_dssp(sequence, raw_vals=False):
     '''
@@ -343,7 +345,10 @@ def predict_dssp_uniprot(uniprot_id, raw_vals=False):
     
     """
     # get sequence
-    sequence = _fetch_sequence(uniprot_id)
+    sequence_and_name = getseq(uniprot_id)
+    sequence = sequence_and_name[1]
+
+    print(f'DSSP predictions for {sequence_and_name[0]}')
 
     # return scores
     return _predict_dssp(sequence, raw_vals=raw_vals)
@@ -408,7 +413,10 @@ def graph_dssp_uniprot(uniprot_id,
     _dssp_tools.valid_range(dis_threshhold, 0.0, 1.0)
 
     # get sequence
-    sequence = _fetch_sequence(uniprot_id)
+    sequence_and_name = getseq(uniprot_id)
+    sequence = sequence_and_name[1]
+
+    print(f'Graphing DSSP predictions for {sequence_and_name[0]}')
 
     if raw_vals==False:
         _graph(sequence, title=title, no_disorder_bars = no_disorder_bars,

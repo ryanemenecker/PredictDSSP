@@ -252,6 +252,46 @@ To save the graph, set output file to the path followed by the output file name.
 
 	$ dssp-uniprot Q8RYC8 -r
 
+
+### Graphing DSSP scores from the command-line using a protein name
+
+``dssp-name`` generates a graph from a protien and / or organism name
+
+**Example:**
+
+	$ dssp-name p53 human
+
+*optional arguments*
+
+``-D`` or ``--dpi`` lets you set the DPI of the generated graph.
+
+	$ dssp-name p53 -D
+
+
+``-e`` or ``--exclude_disorder`` lets you exclude disordered regions from predictions.
+
+	$ dssp-name p53 -e
+
+
+``-o`` or ``--output-file`` lets you save the graph to a specific location.
+
+	$ dssp-name p53 -o /my/path/to/file/my_graph.png
+
+
+``-t`` or ``--title`` lets you set the title of the graph.
+
+	$ dssp-name p53 -t MyCoolGraph
+
+``-c`` or ``--cutoff`` lets you set cutoff value for something to be considered disordered.
+
+	$ dssp-name p53 -c 0.5
+
+``-r`` or ``--raw_vals`` lets you graph raw value probabilities
+
+	$ dssp-name p53 -r
+
+
+
 ### Generating DSSP scores from a FASTA file form the command-line
 
 ``dssp-fasta`` generates dssp scores from a specified FASTA file. By default will save the scores to your current directory as dssp_scores.csv

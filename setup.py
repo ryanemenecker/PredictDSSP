@@ -45,7 +45,8 @@ setup(
     setup_requires=[] + pytest_runner,
 
     scripts=['scripts/dssp-uniprot',
-             'scripts/dssp-fasta'],
+             'scripts/dssp-fasta', 
+             'scripts/dssp-name'],
 
     # Additional entries you may want simply uncomment the lines you want and fill in the data
     # url='http://www.my_package.com',  # Website
@@ -56,7 +57,8 @@ setup(
             'matplotlib',
             'protfasta',
             'urllib3',
-            'alphaPredict==1.0'],               # Required packages, pulls from pip if needed; do not use for Conda deployment
+            'alphaPredict==1.0',
+            'getSequence'],               # Required packages, pulls from pip if needed; do not use for Conda deployment
     # platforms=['Linux',
     #            'Mac OS-X',
     #            'Unix',
