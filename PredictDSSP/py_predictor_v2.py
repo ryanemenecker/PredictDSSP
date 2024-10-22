@@ -63,7 +63,7 @@ class Predictor():
 
         self.dtype = dtype
   
-        loaded_model = torch.load(saved_weights, map_location=torch.device('cpu'))
+        loaded_model = torch.load(saved_weights, map_location=torch.device('cpu'), weights_only=True)
         for i in range(len(loaded_model)):
             key, value = loaded_model.popitem(last=False)
             new_key = key[7:]
