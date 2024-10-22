@@ -9,6 +9,7 @@ __pycache__/
 
 # other DS_Store problems
 PredictDSSP/.DS_Store
+PredictDSSP/_version.py
 
 
 # Distribution / packaging

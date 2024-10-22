@@ -9,7 +9,7 @@ import argparse
 import PredictDSSP as dssp
 
 
-if __name__ == "__main__":
+def main():
 
     # Parse command line arguments.
     parser = argparse.ArgumentParser(description='Generate dssp scores for all sequences in a FASTA file.')
