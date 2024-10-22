@@ -21,9 +21,9 @@ requires-python = ">=3.8"
 dependencies = [      
     "numpy",
 	"torch",
-	"metapredict",
+	"metapredict>=2.65.1",
 	"matplotlib",
-	"protfasta",
+	"protfasta>=0.1.15.2",
 	"urllib3",
 	"alphaPredict",
 	"getSequence >= 1.3",

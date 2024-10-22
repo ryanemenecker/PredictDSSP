@@ -306,3 +306,10 @@ To save the graph, set output file to the path followed by the output file name.
 
 	$ dssp-fasta /path/to/my/file/sequences_file.fasta -o /where/to/save/these/scores/dssp_scores.csv
 
+
+## Changes
+
+### 1.3.0 (October 2024)
+* Finally started tracking versions
+* Newest version is PEP517 compliant.
+
