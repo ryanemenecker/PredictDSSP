@@ -7,16 +7,15 @@ import os
 import sys
 import argparse
 
-#import csv
+
 import csv
-#import protfasta
 import protfasta
 from getSequence import getseq
 
 from PredictDSSP.dssp_exceptions import DsspError
 import PredictDSSP as dssp
 
-if __name__ == "__main__":
+def main():
 
     # Parse command line arguments.
     parser = argparse.ArgumentParser(description='Predict dssp scores from a UniProt accession number.')
